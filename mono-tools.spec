@@ -1,5 +1,5 @@
  %define name mono-tools
-%define version 1.2.3
+%define version 1.2.4
 %define release %mkrel 1
 %define monodir %_prefix/lib/mono
 %define monodocdir %_prefix/lib/monodoc
@@ -62,7 +62,12 @@ EOF
 desktop-file-install --vendor="" \
   --remove-category="Application" \
   --add-category="X-MandrivaLinux-MoreApplications-Documentation" \
-  --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/*
+  --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/monodoc.desktop
+desktop-file-install --vendor="" \
+  --remove-category="Application" \
+  --add-category="X-MandrivaLinux-MoreApplications-Development-Tools" \
+  --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/ilcontrast.desktop
+
 
 mkdir -p %buildroot{%_liconsdir,%_miconsdir,%_iconsdir}
 ln -s %_datadir/pixmaps/monodoc.png %buildroot/%_liconsdir/monodoc.png
@@ -90,7 +95,9 @@ rm -rf $RPM_BUILD_ROOT
 %_bindir/gnunit
 %_bindir/gnunit2
 %_bindir/create-native-map
+%_bindir/ilcontrast
 %_prefix/lib/create-native-map
+%_prefix/lib/ilcontrast/
 %_mandir/man1/*
 %monodir/1.0/*
 %monodir/2.0/*
@@ -99,7 +106,9 @@ rm -rf $RPM_BUILD_ROOT
 %monodocdir/GtkHtmlHtmlRender.dll
 %pkgconfigdir/*.pc
 %_datadir/pixmaps/monodoc.png
+%_datadir/pixmaps/ilcontrast.png
 %_datadir/applications/monodoc.desktop
+%_datadir/applications/ilcontrast.desktop
 %_menudir/%name
 %_liconsdir/monodoc.png
 %_iconsdir/monodoc.png
