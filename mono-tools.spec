@@ -1,6 +1,6 @@
  %define name mono-tools
 %define version 1.2.4
-%define release %mkrel 1
+%define release %mkrel 2
 %define monodir %_prefix/lib/mono
 %define monodocdir %_prefix/lib/monodoc
 %define monodocver 1.1.9
@@ -15,6 +15,7 @@ Version: %{version}
 Release: %{release}
 Source0: http://go-mono.com/sources/mono-tools/%{name}-%{version}.tar.bz2
 Patch: mono-tools-firefox.patch
+Patch1: mono-tools-1.2.4-desktopentry.patch
 License: GPL/LGPL
 Group: Development/Other
 Url: http://www.go-mono.com
@@ -38,6 +39,7 @@ utilities for use with Mono.
 %prep
 %setup -q
 %patch -p1 -b .firefox
+%patch1 -p1
 
 %build
 ./configure --prefix=%_prefix --libdir=%_prefix/lib --mandir=%_mandir
