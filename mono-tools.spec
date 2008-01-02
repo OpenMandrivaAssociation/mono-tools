@@ -19,6 +19,7 @@ Patch1: mono-tools-1.2.4-desktopentry.patch
 License: GPL/LGPL
 Group: Development/Other
 Url: http://www.go-mono.com
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: mono-devel
 BuildRequires: monodoc >= %monodocver
 BuildRequires: gnome-sharp2
