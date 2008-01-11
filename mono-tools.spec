@@ -50,17 +50,6 @@ rm -rf $RPM_BUILD_ROOT %name.lang
 %makeinstall_std pkgconfigdir=%pkgconfigdir
 %find_lang %name
 #menu
-install -d -m 755 $RPM_BUILD_ROOT%{_menudir}
-cat >$RPM_BUILD_ROOT%{_menudir}/%{name} <<EOF
-?package(%{name}): \
-	command="%{_bindir}/monodoc" \
-	needs="X11" \
-	section="More Applications/Documentation" \
-	icon="monodoc.png" \
-	title="Monodoc" \
-	longtitle="Monodoc Documentation Browser" \
-	startup_notify="false" xdg="true"
-EOF
 desktop-file-install --vendor="" \
   --remove-category="Application" \
   --add-category="X-MandrivaLinux-MoreApplications-Documentation" \
@@ -111,7 +100,6 @@ rm -rf $RPM_BUILD_ROOT
 %_datadir/pixmaps/ilcontrast.png
 %_datadir/applications/monodoc.desktop
 %_datadir/applications/ilcontrast.desktop
-%_menudir/%name
 %_liconsdir/monodoc.png
 %_iconsdir/monodoc.png
 %_miconsdir/monodoc.png
