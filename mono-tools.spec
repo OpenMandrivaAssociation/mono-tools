@@ -1,6 +1,6 @@
  %define name mono-tools
 %define version 1.2.6
-%define release %mkrel 1
+%define release %mkrel 2
 %define monodir %_prefix/lib/mono
 %define monodocdir %_prefix/lib/monodoc
 %define monodocver 1.1.9
@@ -16,6 +16,7 @@ Release: %{release}
 Source0: http://go-mono.com/sources/mono-tools/%{name}-%{version}.tar.bz2
 Patch: mono-tools-firefox.patch
 Patch1: mono-tools-1.2.4-desktopentry.patch
+Patch2: mono-tools-1.2.6-gnome-sharp.patch
 License: GPL/LGPL
 Group: Development/Other
 Url: http://www.go-mono.com
@@ -23,6 +24,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: mono-devel
 BuildRequires: monodoc >= %monodocver
 BuildRequires: gnome-sharp2
+BuildRequires: gnome-desktop-sharp
 BuildRequires: glade-sharp2
 BuildRequires: gecko-sharp2
 BuildRequires: ImageMagick
@@ -40,6 +42,8 @@ utilities for use with Mono.
 %setup -q
 %patch -p1 -b .firefox
 %patch1 -p1
+%patch2 -p1
+automake
 
 %build
 ./configure --prefix=%_prefix --libdir=%_prefix/lib --mandir=%_mandir
