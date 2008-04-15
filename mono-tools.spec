@@ -1,6 +1,6 @@
  %define name mono-tools
-%define version 1.2.6
-%define release %mkrel 2
+%define version 1.9
+%define release %mkrel 1
 %define monodir %_prefix/lib/mono
 %define monodocdir %_prefix/lib/monodoc
 %define monodocver 1.1.9
@@ -15,16 +15,14 @@ Version: %{version}
 Release: %{release}
 Source0: http://go-mono.com/sources/mono-tools/%{name}-%{version}.tar.bz2
 Patch: mono-tools-firefox.patch
-Patch1: mono-tools-1.2.4-desktopentry.patch
-Patch2: mono-tools-1.2.6-gnome-sharp.patch
 License: GPL/LGPL
 Group: Development/Other
 Url: http://www.go-mono.com
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires: mono-devel
+BuildRequires: mono-devel >= 1.9
 BuildRequires: monodoc >= %monodocver
-BuildRequires: gnome-sharp2
-BuildRequires: gnome-desktop-sharp
+BuildRequires: gnome-sharp2-devel
+BuildRequires: gnome-desktop-sharp-devel
 BuildRequires: glade-sharp2
 BuildRequires: gecko-sharp2
 BuildRequires: ImageMagick
@@ -41,9 +39,6 @@ utilities for use with Mono.
 %prep
 %setup -q
 %patch -p1 -b .firefox
-%patch1 -p1
-%patch2 -p1
-automake
 
 %build
 ./configure --prefix=%_prefix --libdir=%_prefix/lib --mandir=%_mandir
@@ -87,13 +82,17 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS README ChangeLog
 %_bindir/monodoc
 %_bindir/gasnview
+%_bindir/gendarme
 %_bindir/gnunit
 %_bindir/gnunit2
+%_bindir/gui-compare
 %_bindir/create-native-map
 %_bindir/ilcontrast
 %_prefix/lib/create-native-map
 %_prefix/lib/ilcontrast/
 %_mandir/man1/*
+%_prefix/lib/gendarme
+%_prefix/lib/gui-compare
 %monodir/1.0/*
 %monodir/2.0/*
 %monodocdir/browser.exe
