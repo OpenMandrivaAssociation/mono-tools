@@ -4,11 +4,7 @@
 %define monodir %_prefix/lib/mono
 %define monodocdir %_prefix/lib/monodoc
 %define monodocver 1.1.9
-%if %mdkversion >= 200600
 %define pkgconfigdir %_datadir/pkgconfig
-%else
-%define pkgconfigdir %_libdir/pkgconfig
-%endif
 Summary: Mono tools, including the documentation browser
 Name: %{name}
 Version: %{version}
