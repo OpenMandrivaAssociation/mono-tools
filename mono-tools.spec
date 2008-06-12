@@ -63,12 +63,16 @@ convert -scale 16x16 %buildroot%_datadir/pixmaps/monodoc.png %buildroot%{_micons
 touch %buildroot%monodocdir/monodoc.index
 
 %post
+%if %mdkversion < 200900
 %update_menus
+%endif
 touch %monodocdir/monodoc.index
 %_bindir/monodoc --make-index > /dev/null
 
+%if %mdkversion < 200900
 %postun
 %clean_menus
+%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
