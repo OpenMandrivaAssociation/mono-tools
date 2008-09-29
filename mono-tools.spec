@@ -1,6 +1,6 @@
  %define name mono-tools
 %define version 1.9
-%define release %mkrel 3
+%define release %mkrel 4
 %define monodir %_prefix/lib/mono
 %define monodocdir %_prefix/lib/monodoc
 %define monodocver 1.1.9
@@ -10,7 +10,6 @@ Name: %{name}
 Version: %{version}
 Release: %{release}
 Source0: http://go-mono.com/sources/mono-tools/%{name}-%{version}.tar.bz2
-Patch: mono-tools-firefox.patch
 License: GPL/LGPL
 Group: Development/Other
 Url: http://www.go-mono.com
@@ -25,7 +24,7 @@ BuildRequires: ImageMagick
 BuildRequires: desktop-file-utils
 Requires(post): monodoc >= %monodocver
 Requires: monodoc >= %monodocver
-Requires: mozilla-firefox
+Requires: libxulrunner = 1.9
 BuildArch: noarch
 
 %description
@@ -34,7 +33,6 @@ utilities for use with Mono.
 
 %prep
 %setup -q
-%patch -p1 -b .firefox
 
 %build
 ./configure --prefix=%_prefix --libdir=%_prefix/lib --mandir=%_mandir
