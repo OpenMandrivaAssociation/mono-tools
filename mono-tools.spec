@@ -1,6 +1,6 @@
  %define name mono-tools
-%define version 1.9
-%define release %mkrel 4
+%define version 2.0
+%define release %mkrel 1
 %define monodir %_prefix/lib/mono
 %define monodocdir %_prefix/lib/monodoc
 %define monodocver 1.1.9
@@ -10,16 +10,18 @@ Name: %{name}
 Version: %{version}
 Release: %{release}
 Source0: http://go-mono.com/sources/mono-tools/%{name}-%{version}.tar.bz2
-License: GPL/LGPL
+License: GPLv2 and LGPLv2
 Group: Development/Other
 Url: http://www.go-mono.com
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires: mono-devel >= 1.9
+#gw it needs System.Xml.Linq:
+BuildRequires: mono-devel >= 2.0
 BuildRequires: monodoc >= %monodocver
 BuildRequires: gnome-sharp2-devel
 BuildRequires: gnome-desktop-sharp-devel
 BuildRequires: glade-sharp2
 BuildRequires: gecko-sharp2
+BuildRequires: webkit-sharp-devel
 BuildRequires: ImageMagick
 BuildRequires: desktop-file-utils
 Requires(post): monodoc >= %monodocver
@@ -81,13 +83,17 @@ rm -rf $RPM_BUILD_ROOT
 %_bindir/monodoc
 %_bindir/gasnview
 %_bindir/gendarme
+%_bindir/gendarme-wizard
 %_bindir/gnunit
 %_bindir/gnunit2
 %_bindir/gui-compare
 %_bindir/create-native-map
 %_bindir/ilcontrast
+%_bindir/mprof*
 %_prefix/lib/create-native-map
 %_prefix/lib/ilcontrast/
+%dir %_prefix/lib/%name
+%_prefix/lib/%name/mprof*
 %_mandir/man1/*
 %_prefix/lib/gendarme
 %_prefix/lib/gui-compare
@@ -96,10 +102,13 @@ rm -rf $RPM_BUILD_ROOT
 %monodocdir/browser.exe
 %monodocdir/GeckoHtmlRender.dll
 %monodocdir/GtkHtmlHtmlRender.dll
+%monodocdir/MonoWebBrowserHtmlRender.dll
+%monodocdir/WebKitHtmlRender.dll
 %pkgconfigdir/*.pc
 %_datadir/pixmaps/monodoc.png
 %_datadir/pixmaps/ilcontrast.png
 %_datadir/applications/monodoc.desktop
+%_datadir/applications/mprof-heap-viewer.desktop
 %_datadir/applications/ilcontrast.desktop
 %_liconsdir/monodoc.png
 %_iconsdir/monodoc.png
