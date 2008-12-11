@@ -22,7 +22,7 @@ BuildRequires: gnome-desktop-sharp-devel
 BuildRequires: glade-sharp2
 BuildRequires: gecko-sharp2
 BuildRequires: webkit-sharp-devel
-BuildRequires: ImageMagick
+BuildRequires: imagemagick
 BuildRequires: desktop-file-utils
 Requires(post): monodoc >= %monodocver
 Requires: monodoc >= %monodocver
