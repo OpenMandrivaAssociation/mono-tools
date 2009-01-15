@@ -1,9 +1,9 @@
  %define name mono-tools
-%define version 2.0
+%define version 2.2
 %define release %mkrel 1
 %define monodir %_prefix/lib/mono
 %define monodocdir %_prefix/lib/monodoc
-%define monodocver 1.1.9
+%define monover 2.2
 %define pkgconfigdir %_datadir/pkgconfig
 Summary: Mono tools, including the documentation browser
 Name: %{name}
@@ -15,18 +15,13 @@ Group: Development/Other
 Url: http://www.go-mono.com
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 #gw it needs System.Xml.Linq:
-BuildRequires: mono-devel >= 2.0
-BuildRequires: monodoc >= %monodocver
+BuildRequires: mono-devel >= %monover
 BuildRequires: gnome-sharp2-devel
 BuildRequires: gnome-desktop-sharp-devel
 BuildRequires: glade-sharp2
-BuildRequires: gecko-sharp2
 BuildRequires: webkit-sharp-devel
-BuildRequires: imagemagick
-BuildRequires: desktop-file-utils
-Requires(post): monodoc >= %monodocver
-Requires: monodoc >= %monodocver
-Requires: libxulrunner = 1.9
+Requires(post): monodoc-core >= %monover
+Requires: monodoc-core >= %monover
 BuildArch: noarch
 
 %description
@@ -38,27 +33,13 @@ utilities for use with Mono.
 
 %build
 ./configure --prefix=%_prefix --libdir=%_prefix/lib --mandir=%_mandir
-%make
+#gw parallel make fails in 2.2
+make
 
 %install
 rm -rf $RPM_BUILD_ROOT %name.lang
 %makeinstall_std pkgconfigdir=%pkgconfigdir
 %find_lang %name
-#menu
-desktop-file-install --vendor="" \
-  --remove-category="Application" \
-  --add-category="X-MandrivaLinux-MoreApplications-Documentation" \
-  --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/monodoc.desktop
-desktop-file-install --vendor="" \
-  --remove-category="Application" \
-  --add-category="X-MandrivaLinux-MoreApplications-Development-Tools" \
-  --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/ilcontrast.desktop
-
-
-mkdir -p %buildroot{%_liconsdir,%_miconsdir,%_iconsdir}
-ln -s %_datadir/pixmaps/monodoc.png %buildroot/%_liconsdir/monodoc.png
-convert -scale 32x32 %buildroot%_datadir/pixmaps/monodoc.png %buildroot%{_iconsdir}/monodoc.png
-convert -scale 16x16 %buildroot%_datadir/pixmaps/monodoc.png %buildroot%{_miconsdir}/monodoc.png
 
 touch %buildroot%monodocdir/monodoc.index
 
@@ -81,11 +62,13 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 %doc AUTHORS README ChangeLog
 %_bindir/monodoc
+%_bindir/mperfmon
 %_bindir/gasnview
 %_bindir/gendarme
 %_bindir/gendarme-wizard
 %_bindir/gnunit
 %_bindir/gnunit2
+%_bindir/gsharp
 %_bindir/gui-compare
 %_bindir/create-native-map
 %_bindir/ilcontrast
@@ -96,23 +79,23 @@ rm -rf $RPM_BUILD_ROOT
 %_prefix/lib/%name/mprof*
 %_mandir/man1/*
 %_prefix/lib/gendarme
+%_prefix/lib/gsharp
 %_prefix/lib/gui-compare
+%_prefix/lib/mperfmon
 %monodir/1.0/*
 %monodir/2.0/*
 %monodocdir/browser.exe
-%monodocdir/GeckoHtmlRender.dll
 %monodocdir/GtkHtmlHtmlRender.dll
 %monodocdir/MonoWebBrowserHtmlRender.dll
 %monodocdir/WebKitHtmlRender.dll
+%monodocdir/sources/Gendarme*
 %pkgconfigdir/*.pc
-%_datadir/pixmaps/monodoc.png
-%_datadir/pixmaps/ilcontrast.png
+%_datadir/applications/gendarme-wizard.desktop
+%_datadir/applications/gsharp.desktop
 %_datadir/applications/monodoc.desktop
 %_datadir/applications/mprof-heap-viewer.desktop
 %_datadir/applications/ilcontrast.desktop
-%_liconsdir/monodoc.png
-%_iconsdir/monodoc.png
-%_miconsdir/monodoc.png
+%_datadir/pixmaps/*
 %ghost %monodocdir/monodoc.index
 
 
