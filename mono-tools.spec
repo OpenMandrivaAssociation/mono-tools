@@ -1,9 +1,9 @@
  %define name mono-tools
-%define version 2.2
+%define version 2.4
 %define release %mkrel 1
 %define monodir %_prefix/lib/mono
 %define monodocdir %_prefix/lib/monodoc
-%define monover 2.2
+%define monover 2.4
 %define pkgconfigdir %_datadir/pkgconfig
 Summary: Mono tools, including the documentation browser
 Name: %{name}
@@ -66,8 +66,6 @@ rm -rf $RPM_BUILD_ROOT
 %_bindir/gasnview
 %_bindir/gendarme
 %_bindir/gendarme-wizard
-%_bindir/gnunit
-%_bindir/gnunit2
 %_bindir/gsharp
 %_bindir/gui-compare
 %_bindir/create-native-map
@@ -83,12 +81,12 @@ rm -rf $RPM_BUILD_ROOT
 %_prefix/lib/gui-compare
 %_prefix/lib/mperfmon
 %monodir/1.0/*
-%monodir/2.0/*
 %monodocdir/browser.exe
 %monodocdir/GtkHtmlHtmlRender.dll
 %monodocdir/MonoWebBrowserHtmlRender.dll
 %monodocdir/WebKitHtmlRender.dll
 %monodocdir/sources/Gendarme*
+%monodocdir/sources/gendarme*
 %pkgconfigdir/*.pc
 %_datadir/applications/gendarme-wizard.desktop
 %_datadir/applications/gsharp.desktop
