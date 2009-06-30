@@ -1,5 +1,5 @@
  %define name mono-tools
-%define version 2.4
+%define version 2.4.2
 %define release %mkrel 1
 %define monodir %_prefix/lib/mono
 %define monodocdir %_prefix/lib/monodoc
@@ -23,6 +23,7 @@ BuildRequires: webkit-sharp-devel
 Requires(post): monodoc-core >= %monover
 Requires: monodoc-core >= %monover
 BuildArch: noarch
+%define _requires_exceptions lib.*gtk
 
 %description
 Mono Tools is a collection of development and testing programs and
@@ -87,6 +88,7 @@ rm -rf $RPM_BUILD_ROOT
 %monodocdir/WebKitHtmlRender.dll
 %monodocdir/sources/Gendarme*
 %monodocdir/sources/gendarme*
+%monodocdir/web
 %pkgconfigdir/*.pc
 %_datadir/applications/gendarme-wizard.desktop
 %_datadir/applications/gsharp.desktop
