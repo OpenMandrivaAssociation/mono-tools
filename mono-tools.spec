@@ -1,9 +1,9 @@
  %define name mono-tools
-%define version 2.4.3
-%define release %mkrel 2
+%define version 2.6
+%define release %mkrel 1
 %define monodir %_prefix/lib/mono
 %define monodocdir %_prefix/lib/monodoc
-%define monover 2.4
+%define monover 2.6
 %define pkgconfigdir %_datadir/pkgconfig
 Summary: Mono tools, including the documentation browser
 Name: %{name}
@@ -62,6 +62,8 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %name.lang
 %defattr(-,root,root)
 %doc AUTHORS README ChangeLog
+%_bindir/emveepee
+%_bindir/minvoke
 %_bindir/monodoc
 %_bindir/mperfmon
 %_bindir/gasnview
@@ -74,9 +76,14 @@ rm -rf $RPM_BUILD_ROOT
 %_bindir/mprof*
 %_prefix/lib/create-native-map
 %_prefix/lib/ilcontrast/
+%dir %_prefix/lib/minvoke/
+%_prefix/lib/minvoke/minvoke.exe
 %dir %_prefix/lib/%name
+%_prefix/lib/%name/emveepee.exe*
 %_prefix/lib/%name/mprof*
+%_prefix/lib/%name/Mono.Profiler*
 %_mandir/man1/*
+%_mandir/man5/*
 %_prefix/lib/gendarme
 %_prefix/lib/gsharp
 %_prefix/lib/gui-compare
@@ -93,7 +100,6 @@ rm -rf $RPM_BUILD_ROOT
 %_datadir/applications/gendarme-wizard.desktop
 %_datadir/applications/gsharp.desktop
 %_datadir/applications/monodoc.desktop
-%_datadir/applications/mprof-heap-viewer.desktop
 %_datadir/applications/ilcontrast.desktop
 %_datadir/pixmaps/*
 %ghost %monodocdir/monodoc.index
