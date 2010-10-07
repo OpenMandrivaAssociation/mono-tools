@@ -1,9 +1,9 @@
- %define name mono-tools
-%define version 2.6.2
+%define name mono-tools
+%define version 2.8
 %define release %mkrel 1
 %define monodir %_prefix/lib/mono
 %define monodocdir %_prefix/lib/monodoc
-%define monover 2.6
+%define monover 2.8
 %define pkgconfigdir %_datadir/pkgconfig
 Summary: Mono tools, including the documentation browser
 Name: %{name}
@@ -102,6 +102,7 @@ rm -rf $RPM_BUILD_ROOT
 %_datadir/applications/monodoc.desktop
 %_datadir/applications/ilcontrast.desktop
 %_datadir/pixmaps/*
+%_datadir/icons/hicolor/*/apps/*
 %ghost %monodocdir/monodoc.index
 
 
