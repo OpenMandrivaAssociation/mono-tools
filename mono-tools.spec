@@ -1,6 +1,6 @@
 %define name mono-tools
 %define version 2.8
-%define release %mkrel 1
+%define release %mkrel 2
 %define monodir %_prefix/lib/mono
 %define monodocdir %_prefix/lib/monodoc
 %define monover 2.8
@@ -41,7 +41,8 @@ make
 rm -rf $RPM_BUILD_ROOT %name.lang
 %makeinstall_std pkgconfigdir=%pkgconfigdir
 %find_lang %name
-
+#gw it needs Mono.WebBrowser which needs gluezilla
+rm -f %buildroot%monodocdir/MonoWebBrowserHtmlRender.dll
 touch %buildroot%monodocdir/monodoc.index
 
 %post
@@ -91,7 +92,7 @@ rm -rf $RPM_BUILD_ROOT
 %monodir/1.0/*
 %monodocdir/browser.exe
 %monodocdir/GtkHtmlHtmlRender.dll
-%monodocdir/MonoWebBrowserHtmlRender.dll
+#%monodocdir/MonoWebBrowserHtmlRender.dll
 %monodocdir/WebKitHtmlRender.dll
 %monodocdir/sources/Gendarme*
 %monodocdir/sources/gendarme*
