@@ -1,9 +1,9 @@
 %define name mono-tools
-%define version 2.8
-%define release %mkrel 2
+%define version 2.10
+%define release %mkrel 1
 %define monodir %_prefix/lib/mono
 %define monodocdir %_prefix/lib/monodoc
-%define monover 2.8
+%define monover 2.10
 %define pkgconfigdir %_datadir/pkgconfig
 Summary: Mono tools, including the documentation browser
 Name: %{name}
@@ -68,6 +68,7 @@ rm -rf $RPM_BUILD_ROOT
 %_bindir/monodoc
 %_bindir/mperfmon
 %_bindir/gasnview
+%_bindir/gd2i
 %_bindir/gendarme
 %_bindir/gendarme-wizard
 %_bindir/gsharp
