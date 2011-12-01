@@ -38,7 +38,7 @@ utilities for use with Mono.
 make
 
 %install
-rm -rf $RPM_BUILD_ROOT %name.lang
+rm -rf %{buildroot} %name.lang
 %makeinstall_std pkgconfigdir=%pkgconfigdir
 %find_lang %name
 #gw it needs Mono.WebBrowser which needs gluezilla
@@ -58,7 +58,7 @@ touch %monodocdir/monodoc.index
 %endif
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %files -f %name.lang
 %defattr(-,root,root)
