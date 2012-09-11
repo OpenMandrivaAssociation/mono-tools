@@ -1,6 +1,6 @@
 %define name mono-tools
 %define version 2.10
-%define release %mkrel 3
+%define release %mkrel 4
 %define monodir %{_prefix}/lib/mono
 %define monodocdir %{_prefix}/lib/monodoc
 %define monover 2.10
