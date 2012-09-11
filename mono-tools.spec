@@ -1,10 +1,10 @@
 %define name mono-tools
 %define version 2.10
 %define release %mkrel 3
-%define monodir %_prefix/lib/mono
-%define monodocdir %_prefix/lib/monodoc
+%define monodir %{_prefix}/lib/mono
+%define monodocdir %{_prefix}/lib/monodoc
 %define monover 2.10
-%define pkgconfigdir %_datadir/pkgconfig
+%define pkgconfigdir %{_datadir}/pkgconfig
 Summary: Mono tools, including the documentation browser
 Name: %{name}
 Version: %{version}
@@ -13,7 +13,6 @@ Source0: http://go-mono.com/sources/mono-tools/%{name}-%{version}.tar.bz2
 License: GPLv2 and LGPLv2
 Group: Development/Other
 Url: http://www.go-mono.com
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 #gw it needs System.Xml.Linq:
 BuildRequires: mono-devel >= %monover
 BuildRequires: gnome-sharp2-devel
@@ -33,7 +32,7 @@ utilities for use with Mono.
 %setup -q
 
 %build
-./configure --prefix=%_prefix --libdir=%_prefix/lib --mandir=%_mandir
+./configure --prefix=%{_prefix} --libdir=%{_prefix}/lib --mandir=%{_mandir}
 #gw parallel make fails in 2.2
 make
 
@@ -46,50 +45,38 @@ rm -f %buildroot%monodocdir/MonoWebBrowserHtmlRender.dll
 touch %buildroot%monodocdir/monodoc.index
 
 %post
-%if %mdkversion < 200900
-%update_menus
-%endif
 touch %monodocdir/monodoc.index
-%_bindir/monodoc --make-index > /dev/null
-
-%if %mdkversion < 200900
-%postun
-%clean_menus
-%endif
-
-%clean
-rm -rf %{buildroot}
+%{_bindir}/monodoc --make-index > /dev/null
 
 %files -f %name.lang
-%defattr(-,root,root)
 %doc AUTHORS README ChangeLog
-%_bindir/emveepee
-%_bindir/minvoke
-%_bindir/monodoc
-%_bindir/mperfmon
-%_bindir/gasnview
-%_bindir/gd2i
-%_bindir/gendarme
-%_bindir/gendarme-wizard
-%_bindir/gsharp
-%_bindir/gui-compare
-%_bindir/create-native-map
-%_bindir/ilcontrast
-%_bindir/mprof*
-%_prefix/lib/create-native-map
-%_prefix/lib/ilcontrast/
-%dir %_prefix/lib/minvoke/
-%_prefix/lib/minvoke/minvoke.exe
-%dir %_prefix/lib/%name
-%_prefix/lib/%name/emveepee.exe*
-%_prefix/lib/%name/mprof*
-%_prefix/lib/%name/Mono.Profiler*
-%_mandir/man1/*
-%_mandir/man5/*
-%_prefix/lib/gendarme
-%_prefix/lib/gsharp
-%_prefix/lib/gui-compare
-%_prefix/lib/mperfmon
+%{_bindir}/emveepee
+%{_bindir}/minvoke
+%{_bindir}/monodoc
+%{_bindir}/mperfmon
+%{_bindir}/gasnview
+%{_bindir}/gd2i
+%{_bindir}/gendarme
+%{_bindir}/gendarme-wizard
+%{_bindir}/gsharp
+%{_bindir}/gui-compare
+%{_bindir}/create-native-map
+%{_bindir}/ilcontrast
+%{_bindir}/mprof*
+%{_prefix}/lib/create-native-map
+%{_prefix}/lib/ilcontrast/
+%dir %{_prefix}/lib/minvoke/
+%{_prefix}/lib/minvoke/minvoke.exe
+%dir %{_prefix}/lib/%name
+%{_prefix}/lib/%name/emveepee.exe*
+%{_prefix}/lib/%name/mprof*
+%{_prefix}/lib/%name/Mono.Profiler*
+%{_mandir}/man1/*
+%{_mandir}/man5/*
+%{_prefix}/lib/gendarme
+%{_prefix}/lib/gsharp
+%{_prefix}/lib/gui-compare
+%{_prefix}/lib/mperfmon
 %monodir/1.0/*
 %monodocdir/browser.exe
 %monodocdir/GtkHtmlHtmlRender.dll
@@ -99,12 +86,12 @@ rm -rf %{buildroot}
 %monodocdir/sources/gendarme*
 %monodocdir/web
 %pkgconfigdir/*.pc
-%_datadir/applications/gendarme-wizard.desktop
-%_datadir/applications/gsharp.desktop
-%_datadir/applications/monodoc.desktop
-%_datadir/applications/ilcontrast.desktop
-%_datadir/pixmaps/*
-%_datadir/icons/hicolor/*/apps/*
+%{_datadir}/applications/gendarme-wizard.desktop
+%{_datadir}/applications/gsharp.desktop
+%{_datadir}/applications/monodoc.desktop
+%{_datadir}/applications/ilcontrast.desktop
+%{_datadir}/pixmaps/*
+%{_datadir}/icons/hicolor/*/apps/*
 %ghost %monodocdir/monodoc.index
 
 
