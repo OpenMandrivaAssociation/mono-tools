@@ -12,7 +12,7 @@
 Summary:	Mono tools, including the documentation browser
 Name:		mono-tools
 Version:	2.10
-Release:	5
+Release:	6
 Source0:	http://go-mono.com/sources/mono-tools/%{name}-%{version}.tar.bz2
 License:	GPLv2 and LGPLv2
 Group:		Development/Other
