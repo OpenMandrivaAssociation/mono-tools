@@ -19,10 +19,8 @@ Group:		Development/Other
 Url:		http://www.go-mono.com
 #gw it needs System.Xml.Linq:
 BuildRequires:	mono-devel >= %{monover}
-BuildRequires:	gnome-sharp2-devel
-BuildRequires:	gnome-desktop-sharp-devel
-BuildRequires:	glade-sharp2
 BuildRequires:	webkit-sharp-devel
+BuildRequires:	glade-sharp2
 Requires(post):	monodoc-core >= %{monover}
 Requires:	monodoc-core >= %{monover}
 BuildArch:	noarch
