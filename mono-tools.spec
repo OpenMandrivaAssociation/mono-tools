@@ -54,7 +54,6 @@ touch %{monodocdir}/monodoc.index
 %{_bindir}/minvoke
 %{_bindir}/monodoc
 %{_bindir}/mperfmon
-%{_bindir}/gasnview
 %{_bindir}/gd2i
 %{_bindir}/gendarme
 %{_bindir}/gendarme-wizard
@@ -77,9 +76,7 @@ touch %{monodocdir}/monodoc.index
 %{_prefix}/lib/gsharp
 %{_prefix}/lib/gui-compare
 %{_prefix}/lib/mperfmon
-%{monodir}/1.0/*
 %{monodocdir}/browser.exe
-%{monodocdir}/GtkHtmlHtmlRender.dll
 %{monodocdir}/WebKitHtmlRender.dll
 %{monodocdir}/sources/Gendarme*
 %{monodocdir}/sources/gendarme*
