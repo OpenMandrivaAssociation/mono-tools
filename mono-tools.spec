@@ -13,17 +13,16 @@ Summary:	Mono tools, including the documentation browser
 Name:		mono-tools
 Version:	2.10
 Release:	6
-Source0:	http://go-mono.com/sources/mono-tools/%{name}-%{version}.tar.bz2
 License:	GPLv2 and LGPLv2
 Group:		Development/Other
 Url:		http://www.go-mono.com
-#gw it needs System.Xml.Linq:
-BuildRequires:	mono-devel >= %{monover}
-BuildRequires:	webkit-sharp-devel
-BuildRequires:	glade-sharp2
+Source0:	http://go-mono.com/sources/mono-tools/%{name}-%{version}.tar.bz2
+BuildArch:	noarch
+BuildRequires:	pkgconfig(glade-sharp-2.0)
+BuildRequires:	pkgconfig(mono) >= %{monover}
+BuildRequires:	pkgconfig(webkit-sharp-1.0)
 Requires(post):	monodoc-core >= %{monover}
 Requires:	monodoc-core >= %{monover}
-BuildArch:	noarch
 
 %description
 Mono Tools is a collection of development and testing programs and
@@ -33,7 +32,10 @@ utilities for use with Mono.
 %setup -q
 
 %build
-./configure --prefix=%{_prefix} --libdir=%{_prefix}/lib --mandir=%{_mandir}
+./configure \
+	--prefix=%{_prefix} \
+	--libdir=%{_prefix}/lib \
+	--mandir=%{_mandir}
 #gw parallel make fails in 2.2
 make
 
@@ -89,5 +91,4 @@ touch %{monodocdir}/monodoc.index
 %{_datadir}/pixmaps/*
 %{_datadir}/icons/hicolor/*/apps/*
 %ghost %{monodocdir}/monodoc.index
-
 
