@@ -17,6 +17,7 @@ License:	GPLv2 and LGPLv2
 Group:		Development/Other
 Url:		http://www.go-mono.com
 Source0:	http://go-mono.com/sources/mono-tools/%{name}-%{version}.tar.bz2
+Source100:	mono-tools.rpmlintrc
 BuildArch:	noarch
 BuildRequires:	pkgconfig(glade-sharp-2.0)
 BuildRequires:	pkgconfig(mono) >= %{monover}
@@ -89,6 +90,5 @@ touch %{monodocdir}/monodoc.index
 %{_datadir}/applications/monodoc.desktop
 %{_datadir}/applications/ilcontrast.desktop
 %{_datadir}/pixmaps/*
-%{_datadir}/icons/hicolor/*/apps/*
 %ghost %{monodocdir}/monodoc.index
 
