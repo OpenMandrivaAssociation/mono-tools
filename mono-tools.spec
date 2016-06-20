@@ -11,17 +11,18 @@
 
 Summary:	Mono tools, including the documentation browser
 Name:		mono-tools
-Version:	2.10
-Release:	14
+Version:	4.2
+Release:	1
 License:	GPLv2 and LGPLv2
 Group:		Development/Other
 Url:		http://www.go-mono.com
-Source0:	http://go-mono.com/sources/mono-tools/%{name}-%{version}.tar.bz2
+Source0:	http://download.mono-project.com/sources/%{name}/%{name}-%{version}.tar.gz
 Source100:	mono-tools.rpmlintrc
 BuildArch:	noarch
 BuildRequires:	pkgconfig(glade-sharp-2.0)
 BuildRequires:	pkgconfig(mono) >= %{monover}
 BuildRequires:	pkgconfig(webkit-sharp-1.0)
+BuildRequires:	pkgconfig(nunit)
 Requires(post):	monodoc-core >= %{monover}
 Requires:	monodoc-core >= %{monover}
 
