@@ -12,7 +12,7 @@
 Summary:	Mono tools, including the documentation browser
 Name:		mono-tools
 Version:	4.2
-Release:	3
+Release:	4
 License:	GPLv2 and LGPLv2
 Group:		Development/Other
 Url:		http://www.go-mono.com
@@ -40,10 +40,10 @@ utilities for use with Mono.
 	--libdir=%{_prefix}/lib \
 	--mandir=%{_mandir}
 #gw parallel make fails in 2.2
-make
+%make_build
 
 %install
-%makeinstall_std pkgconfigdir=%{pkgconfigdir}
+%make_install pkgconfigdir=%{pkgconfigdir}
 %find_lang %{name}
 #gw it needs Mono.WebBrowser which needs gluezilla
 rm -f %{buildroot}%{monodocdir}/MonoWebBrowserHtmlRender.dll
