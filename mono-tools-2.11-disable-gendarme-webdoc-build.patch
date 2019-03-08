@@ -1,0 +1,9 @@
+--- mono-tools-master/Makefile.am.orig	2013-07-11 21:19:56.042000000 +0200
++++ mono-tools-master/Makefile.am	2013-07-11 21:20:04.591000000 +0200
+@@ -1,5 +1,5 @@
+ SUBDIRS= po docbrowser asn1view create-native-map ilcontrast gui-compare \
+-	gendarme mperfmon gsharp webdoc minvoke Mono.Profiler
++	mperfmon gsharp minvoke Mono.Profiler
+ 
+ #capture aclocal flags for autoreconf
+ ACLOCAL_AMFLAGS=$(ACLOCAL_FLAGS)
