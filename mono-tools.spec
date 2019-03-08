@@ -26,7 +26,8 @@ BuildArch:	noarch
 BuildRequires:	pkgconfig(glade-sharp-2.0)
 BuildRequires:	pkgconfig(mono) >= %{monover}
 BuildRequires:	pkgconfig(webkit-sharp-1.0)
-BuildRequires:	pkgconfig(mono-nunit)
+#BuildRequires:	pkgconfig(mono-nunit)
+BuildRequires:	pkgconfig(nunit22)
 BuildRequires:	zip
 Requires(post):	monodoc-core >= %{monover}
 Requires:	monodoc-core >= %{monover}
