@@ -28,6 +28,7 @@ BuildRequires:	pkgconfig(mono) >= %{monover}
 BuildRequires:	pkgconfig(webkit-sharp-1.0)
 #BuildRequires:	pkgconfig(mono-nunit)
 BuildRequires:	pkgconfig(nunit22)
+BuildRequires:	mono-nunit
 BuildRequires:	zip
 Requires(post):	monodoc-core >= %{monover}
 Requires:	monodoc-core >= %{monover}
