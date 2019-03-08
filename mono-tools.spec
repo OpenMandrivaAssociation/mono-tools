@@ -18,6 +18,10 @@ Group:		Development/Other
 Url:		http://www.go-mono.com
 Source0:	http://download.mono-project.com/sources/%{name}/%{name}-%{version}.tar.gz
 Source100:	mono-tools.rpmlintrc
+Source1:        gsharp.svg
+Patch1:         mono-tools-2.11-disable-gendarme-webdoc-build.patch
+Patch2:         gsharp_icon.patch
+Patch3:         mono-tools-4.2-docbrowser.patch
 BuildArch:	noarch
 BuildRequires:	pkgconfig(glade-sharp-2.0)
 BuildRequires:	pkgconfig(mono) >= %{monover}
@@ -33,64 +37,75 @@ utilities for use with Mono.
 
 %prep
 %setup -q
+%patch1 -p1 -b .disable_gendarme
+%patch2 -p0 -b .gsharp_icon
+%patch3 -p1 -b .docbrowser
+
+for i in `find . -name "*.am"`;
+do
+	sed -i -e 's|-define:DEBUG|-define:DEBUG -sdk:4|g' $i
+done
+
+find . -name "Makefile.in" -print -exec sed -i "s#GMCS#MCS#g; s#DMCS#MCS#g" {} \;
+find . -name "configure" -print -exec sed -i "s#GMCS#MCS#g; s#DMCS#MCS#g" {} \;
+sed -i "s#mono-nunit#nunit#g" configure
+sed -i "s#mono-nunit#nunit#g" gendarme/rules/Test.Rules/Makefile.in
 
 %build
-./configure \
-	--prefix=%{_prefix} \
-	--libdir=%{_prefix}/lib \
-	--mandir=%{_mandir}
+%configure2_5x --libdir=%{_prefix}/lib --build=%{_build}
 #gw parallel make fails in 2.2
-%make_build
+%__make
 
 %install
-%make_install pkgconfigdir=%{pkgconfigdir}
-%find_lang %{name}
+%make_install pkgconfigdir=%pkgconfigdir
+
+%find_lang %name
+
 #gw it needs Mono.WebBrowser which needs gluezilla
-rm -f %{buildroot}%{monodocdir}/MonoWebBrowserHtmlRender.dll
-touch %{buildroot}%{monodocdir}/monodoc.index
+rm -f %buildroot%monodocdir/MonoWebBrowserHtmlRender.dll
+touch %buildroot%monodocdir/monodoc.index
 
-%post
-touch %{monodocdir}/monodoc.index
-%{_bindir}/monodoc --make-index > /dev/null
+mkdir -p %buildroot%_iconsdir
+cp %{SOURCE1} %buildroot%_iconsdir
 
-%files -f %{name}.lang
+%files -f %name.lang
 %doc AUTHORS README ChangeLog
-%{_bindir}/emveepee
-%{_bindir}/minvoke
-%{_bindir}/monodoc
-%{_bindir}/mperfmon
-%{_bindir}/gd2i
-%{_bindir}/gendarme
-%{_bindir}/gendarme-wizard
-%{_bindir}/gsharp
-%{_bindir}/gui-compare
-%{_bindir}/create-native-map
-%{_bindir}/ilcontrast
-%{_bindir}/mprof*
-%{_prefix}/lib/create-native-map
-%{_prefix}/lib/ilcontrast/
-%dir %{_prefix}/lib/minvoke/
-%{_prefix}/lib/minvoke/minvoke.exe
-%dir %{_prefix}/lib/%{name}
-%{_prefix}/lib/%{name}/emveepee.exe*
-%{_prefix}/lib/%{name}/mprof*
-%{_prefix}/lib/%{name}/Mono.Profiler*
-%{_mandir}/man1/*
-%{_mandir}/man5/*
-%{_prefix}/lib/gendarme
-%{_prefix}/lib/gsharp
-%{_prefix}/lib/gui-compare
-%{_prefix}/lib/mperfmon
-%{monodocdir}/browser.exe
-%{monodocdir}/WebKitHtmlRender.dll
-%{monodocdir}/sources/Gendarme*
-%{monodocdir}/sources/gendarme*
-%{monodocdir}/web
-%{pkgconfigdir}/*.pc
-%{_datadir}/applications/gendarme-wizard.desktop
-%{_datadir}/applications/gsharp.desktop
-%{_datadir}/applications/monodoc.desktop
-%{_datadir}/applications/ilcontrast.desktop
-%{_datadir}/pixmaps/*
-%ghost %{monodocdir}/monodoc.index
+%_bindir/emveepee
+%_bindir/minvoke
+%_bindir/monodoc
+%_bindir/mperfmon
+%_bindir/gasnview
+%_bindir/gd2i
+%_bindir/gendarme
+%_bindir/gendarme-wizard
+%_bindir/gsharp
+%_bindir/gui-compare
+%_bindir/create-native-map
+%_bindir/mprof*
+%_prefix/lib/create-native-map
+%dir %_prefix/lib/minvoke/
+%_prefix/lib/minvoke/minvoke.exe
+%dir %_prefix/lib/%name
+%_prefix/lib/%name/emveepee.exe*
+%_prefix/lib/%name/mprof*
+%_prefix/lib/%name/Mono.Profiler*
+%_mandir/man1/*
+%_mandir/man5/*
+%_prefix/lib/gendarme
+%_prefix/lib/gsharp
+%_prefix/lib/gui-compare
+%_prefix/lib/mperfmon
+%_iconsdir/gsharp.*
+%monodir/1.0/*
+%monodocdir/browser.exe
+%monodocdir/sources/Gendarme*
+%monodocdir/sources/gendarme*
+%monodocdir/web
+%pkgconfigdir/*.pc
+%_datadir/applications/gendarme-wizard.desktop
+%_datadir/applications/gsharp.desktop
+%_datadir/applications/monodoc.desktop
+%_datadir/pixmaps/*
+%_datadir/icons/hicolor/*/apps/*
+%ghost %monodocdir/monodoc.index
 
