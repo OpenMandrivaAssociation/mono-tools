@@ -12,7 +12,7 @@
 Summary:	Mono tools, including the documentation browser
 Name:		mono-tools
 Version:	4.2
-Release:	3
+Release:	4
 License:	GPLv2 and LGPLv2
 Group:		Development/Other
 Url:		http://www.go-mono.com
