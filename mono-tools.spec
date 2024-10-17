@@ -15,7 +15,7 @@ Version:	4.2
 Release:	4
 License:	GPLv2 and LGPLv2
 Group:		Development/Other
-Url:		http://www.go-mono.com
+Url:		https://www.go-mono.com
 Source0:	http://download.mono-project.com/sources/%{name}/%{name}-%{version}.tar.gz
 Source100:	mono-tools.rpmlintrc
 BuildArch:	noarch
