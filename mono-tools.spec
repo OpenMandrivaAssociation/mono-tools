@@ -19,6 +19,11 @@ Url:		https://www.go-mono.com
 Source0:	http://download.mono-project.com/sources/%{name}/%{name}-%{version}.tar.gz
 Source100:	mono-tools.rpmlintrc
 BuildArch:	noarch
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	pkgconfig(glade-sharp-2.0)
 BuildRequires:	pkgconfig(mono) >= %{monover}
 BuildRequires:	pkgconfig(webkit-sharp-1.0)
